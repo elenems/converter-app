@@ -1,0 +1,23 @@
+#pageNotFound {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+#pageNotFound > div {
+  text-align: center;
+  padding: 100px;
+  border-radius: 12px;
+  background: #f9f9f9;
+}
+
+#pageNotFound a {
+  color: black;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+#pageNotFound a:hover {
+  text-decoration: underline;
+}
