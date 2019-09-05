@@ -16,3 +16,20 @@ code {
   margin-left: 10%;
   margin-right: 10%;
 }
+
+main{
+  padding-bottom: 40px;
+}
+
+.error{
+  text-align: center;
+  background: #e24141;
+  padding: 12px;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.chart-container{
+  height:70vh;
+}

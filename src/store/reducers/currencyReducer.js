@@ -3,7 +3,8 @@ import {
   CHANGE_AMOUNT,
   CHANGE_CURRENCY,
   SET_RATES,
-  CALCULATE_CURRENCY
+  CALCULATE_CURRENCY,
+  SET_HISTORY_RATES
 } from "../actions/actionTypes";
 
 const initState = {
@@ -11,16 +12,33 @@ const initState = {
   amountTo: 0,
   currencyFrom: "",
   currencyTo: "",
-  rates: null
+  rates: null,
+  historyRates: [],
+  historyFrom: "2015-01-01"
 };
 
 const currencyReducer = (state = initState, action) => {
-  if (action.type === SWITCH_CURRENCIES) {
+  if (
+    action.type === SWITCH_CURRENCIES &&
+    state.currencyFrom &&
+    state.currencyTo
+  ) {
     const { currencyFrom, currencyTo } = state;
     return {
       ...state,
       currencyFrom: currencyTo,
       currencyTo: currencyFrom
+    };
+  }
+
+  if (
+    action.type === SET_HISTORY_RATES &&
+    state.currencyFrom &&
+    state.currencyTo
+  ) {
+    return {
+      ...state,
+      historyRates: action.payload
     };
   }
 

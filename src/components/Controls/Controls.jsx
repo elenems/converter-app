@@ -5,11 +5,12 @@ import Box from "@material-ui/core/Box";
 import Input from "./Input";
 import Select from "./Select";
 import Button from "./Button";
-import {currencies} from '../../data/currencies';
+import { currencies } from "../../data/currencies";
 import {
   switchCurrencies,
   handleAmountChange,
-  handleCurrencyChange
+  handleCurrencyChange,
+  setHistoryRates
 } from "../../store/actions/currencyActions";
 
 const fromCurrencies = currencies;
@@ -24,11 +25,17 @@ class Controls extends Component {
   }
 
   switchCurrecnies() {
-    this.props.switchCurrencies(this.props.currencyTo);
+    const { historyFrom, currencyTo, currencyFrom } = this.props;
+    this.props.switchCurrencies({ currencyTo, historyFrom, currencyFrom });
   }
 
   handleSelectChange(e) {
-    this.props.handleCurrencyChange(e);
+    const { historyFrom, currencyTo, currencyFrom } = this.props;
+    this.props.handleCurrencyChange(e, {
+      historyFrom,
+      currencyFrom,
+      currencyTo
+    });
   }
 
   handleChange(e) {
@@ -38,45 +45,48 @@ class Controls extends Component {
   render() {
     const { amountFrom, currencyFrom, currencyTo, amountTo } = this.props;
     return (
-      <Box
-        style={{ margin: "40px 0px" }}
-        display="flex"
-        justifyContent="space-between"
-      >
-        <Input
-          isDisabled={false}
-          inputId="amountFrom"
-          value={amountFrom}
-          handleChange={this.handleChange}
-          fieldLabel="Amount from"
-        />
+      <div>
+        <Box
+          style={{ margin: "40px 0px" }}
+          display="flex"
+          justifyContent="space-between"
+        >
+          <Input
+            isDisabled={false}
+            inputId="amountFrom"
+            value={amountFrom}
+            handleChange={this.handleChange}
+            fieldLabel="Amount from"
+          />
 
-        <Select
-          handleChange={this.handleSelectChange}
-          selectValue={currencyFrom}
-          values={fromCurrencies}
-          selectLabel="Currency from"
-          selectId="currencyFrom"
-        />
+          <Select
+            handleChange={this.handleSelectChange}
+            selectValue={currencyFrom}
+            values={fromCurrencies}
+            selectLabel="Currency from"
+            selectId="currencyFrom"
+          />
 
-        <Button handleClick={this.switchCurrecnies} />
+          <Button handleClick={this.switchCurrecnies} />
 
-        <Select
-          handleChange={this.handleSelectChange}
-          selectValue={currencyTo}
-          values={toCurrencies}
-          selectLabel="Currency to"
-          selectId="currencyTo"
-        />
+          <Select
+            handleChange={this.handleSelectChange}
+            selectValue={currencyTo}
+            values={toCurrencies}
+            selectLabel="Currency to"
+            selectId="currencyTo"
+          />
 
-        <Input
-          isDisabled={true}
-          inputId="amountTo"
-          value={amountTo}
-          handleChange={this.handleChange}
-          fieldLabel="Amount To"
-        />
-      </Box>
+          <Input
+            isDisabled={true}
+            inputId="amountTo"
+            value={amountTo}
+            handleChange={this.handleChange}
+            fieldLabel="Amount To"
+          />
+        </Box>
+        {this.props.error ? <p className="error">{this.props.error}</p> : null}
+      </div>
     );
   }
 }
@@ -86,15 +96,19 @@ const mapStateToProps = state => {
     amountFrom: state.currency.amountFrom,
     amountTo: state.currency.amountTo,
     currencyFrom: state.currency.currencyFrom,
-    currencyTo: state.currency.currencyTo
+    currencyTo: state.currency.currencyTo,
+    historyFrom: state.currency.historyFrom,
+    error: state.ui.error
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    switchCurrencies: (payload) => dispatch(switchCurrencies(payload)),
+    switchCurrencies: payload => dispatch(switchCurrencies(payload)),
     handleAmountChange: payload => dispatch(handleAmountChange(payload)),
-    handleCurrencyChange: payload => dispatch(handleCurrencyChange(payload))
+    handleCurrencyChange: (e, payload) =>
+      dispatch(handleCurrencyChange(e, payload)),
+    setHistoryRates: payload => dispatch(setHistoryRates(payload))
   };
 };
 
