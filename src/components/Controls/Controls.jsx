@@ -79,9 +79,11 @@ class Controls extends Component {
     } = this.props;
     return (
       <div>
+        <div className='inputs'>
         <Box
           style={{ margin: "40px 0px 20px" }}
           display="flex"
+          flexWrap="wrap"
           justifyContent="space-between"
         >
           <Input
@@ -118,7 +120,8 @@ class Controls extends Component {
             fieldLabel="Amount To"
           />
         </Box>
-        {this.props.error ? <p className="error">{this.props.error}</p> : null}
+        </div>
+        <div className='range-filters'>
         <Box className='controls' style={{ margin: "20px 0px" }} display="flex">
           <RangeFilter
             historyChange={this.setHistoryFrom}
@@ -126,6 +129,8 @@ class Controls extends Component {
           />
           <RangeFilter historyChange={this.setHistoryTo} historyRange={historyTo} />
         </Box>
+        </div>
+        {this.props.error ? <p className="error">{this.props.error}</p> : null}
       </div>
     );
   }

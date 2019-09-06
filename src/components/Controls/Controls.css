@@ -1,4 +1,31 @@
 .MuiFormControl-root{
-    max-width: 200px;
     width: 16%;
+}
+
+.range-filters .MuiFormControl-root{
+    width:200px;
+}
+
+@media(max-width:991px){
+    .inputs .MuiFormControl-root{
+        width: 33%;
+        margin: 10px 0px;
+    }
+    .inputs .MuiFormControl-root:nth-child(1){
+        order:1;
+    }
+    .inputs .MuiFormControl-root:nth-child(2){
+        order:4;
+    }
+    .inputs .MuiButton-containedPrimary{
+        order:2;
+    }
+    
+    .inputs .MuiFormControl-root:nth-child(5){
+        order:3;
+    }
+    .inputs .MuiFormControl-root:nth-child(4){
+        order:5;
+    }
+    
 }
