@@ -1,7 +1,9 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
-export default React.memo(function Input(props) {
+import PropTypes from "prop-types";
+function Input(props) {
   const { isDisabled, inputId, value, fieldLabel, handleChange } = props;
+
   return (
     <TextField
       disabled={isDisabled}
@@ -12,4 +14,15 @@ export default React.memo(function Input(props) {
       variant="outlined"
     />
   );
-});
+}
+
+Input.propTypes = {
+  inputId: PropTypes.any.isRequired,
+  handleChange: PropTypes.func.isRequired
+};
+
+Input.defaultProps = {
+  isDisabled: false
+};
+
+export default React.memo(Input);

@@ -4,16 +4,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
+import PropTypes from "prop-types";
 
-export default React.memo(function Select({
-  selectId,
-  selectLabel,
-  values,
-  selectValue,
-  handleChange
-}) {
+function Select({ selectId, selectLabel, values, selectValue, handleChange }) {
   const inputLabel = React.useRef(null);
-
   const [labelWidth, setLabelWidth] = React.useState(0);
   React.useEffect(() => {
     setLabelWidth(inputLabel.current.offsetWidth);
@@ -45,4 +39,11 @@ export default React.memo(function Select({
       </MaterialSelect>
     </FormControl>
   );
-});
+}
+
+Select.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  values: PropTypes.array.isRequired
+};
+
+export default React.memo(Select);

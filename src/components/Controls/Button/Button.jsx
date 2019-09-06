@@ -4,8 +4,9 @@ import { MdChevronLeft } from "react-icons/md";
 import { MdChevronRight } from "react-icons/md";
 import Tooltip from "@material-ui/core/Tooltip";
 import "./Button.css";
+import PropTypes from "prop-types";
 
-export default React.memo(function Button({ handleClick }) {
+function Button({ handleClick }) {
   return (
     <Tooltip title="Switch currencies" placement="bottom">
       <MaterialButton onClick={handleClick} variant="contained" color="primary">
@@ -14,4 +15,10 @@ export default React.memo(function Button({ handleClick }) {
       </MaterialButton>
     </Tooltip>
   );
-});
+}
+
+Button.propTypes = {
+  handleClick: PropTypes.func.isRequired
+};
+
+export default React.memo(Button);

@@ -5,7 +5,9 @@ import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider
 } from "@material-ui/pickers";
-export default function RangeFilter(props) {
+import PropTypes from "prop-types";
+
+function RangeFilter(props) {
   const [selectedDate, setSelectedDate] = React.useState(
     new Date(props.historyRange)
   );
@@ -32,3 +34,9 @@ export default function RangeFilter(props) {
     </MuiPickersUtilsProvider>
   );
 }
+
+RangeFilter.propTypes = {
+  historyChange: PropTypes.func.isRequired
+};
+
+export default React.memo(RangeFilter);
