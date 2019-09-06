@@ -31,7 +31,12 @@ class Controls extends Component {
 
   switchCurrecnies() {
     const { historyFrom, historyTo, currencyTo, currencyFrom } = this.props;
-    this.props.switchCurrencies({ currencyTo, historyTo, historyFrom, currencyFrom });
+    this.props.switchCurrencies({
+      currencyTo,
+      historyTo,
+      historyFrom,
+      currencyFrom
+    });
   }
 
   handleSelectChange(e) {
@@ -49,9 +54,9 @@ class Controls extends Component {
   }
 
   setHistoryFrom(dateFrom) {
-    const {historyTo, currencyTo, currencyFrom } = this.props;
+    const { historyTo, currencyTo, currencyFrom } = this.props;
     this.props.setHistoryFrom({
-      historyFrom:dateFrom,
+      historyFrom: dateFrom,
       historyTo,
       currencyTo,
       currencyFrom
@@ -59,10 +64,10 @@ class Controls extends Component {
   }
 
   setHistoryTo(dateTo) {
-    const {historyFrom, currencyTo, currencyFrom } = this.props;
+    const { historyFrom, currencyTo, currencyFrom } = this.props;
     this.props.setHistoryTo({
       historyFrom,
-      historyTo:dateTo,
+      historyTo: dateTo,
       currencyTo,
       currencyFrom
     });
@@ -79,56 +84,63 @@ class Controls extends Component {
     } = this.props;
     return (
       <div>
-        <div className='inputs'>
-        <Box
-          style={{ margin: "40px 0px 20px" }}
-          display="flex"
-          flexWrap="wrap"
-          justifyContent="space-between"
-        >
-          <Input
-            isDisabled={false}
-            inputId="amountFrom"
-            value={amountFrom}
-            handleChange={this.handleChange}
-            fieldLabel="Amount from"
-          />
+        <div className="inputs">
+          <Box
+            style={{ margin: "40px 0px 20px" }}
+            display="flex"
+            flexWrap="wrap"
+            justifyContent="space-between"
+          >
+            <Input
+              isDisabled={false}
+              inputId="amountFrom"
+              value={amountFrom}
+              handleChange={this.handleChange}
+              fieldLabel="Amount from"
+            />
 
-          <Select
-            handleChange={this.handleSelectChange}
-            selectValue={currencyFrom}
-            values={fromCurrencies}
-            selectLabel="Currency from"
-            selectId="currencyFrom"
-          />
+            <Select
+              handleChange={this.handleSelectChange}
+              selectValue={currencyFrom}
+              values={fromCurrencies}
+              selectLabel="Currency from"
+              selectId="currencyFrom"
+            />
 
-          <Button handleClick={this.switchCurrecnies} />
+            <Button handleClick={this.switchCurrecnies} />
 
-          <Select
-            handleChange={this.handleSelectChange}
-            selectValue={currencyTo}
-            values={toCurrencies}
-            selectLabel="Currency to"
-            selectId="currencyTo"
-          />
+            <Select
+              handleChange={this.handleSelectChange}
+              selectValue={currencyTo}
+              values={toCurrencies}
+              selectLabel="Currency to"
+              selectId="currencyTo"
+            />
 
-          <Input
-            isDisabled={true}
-            inputId="amountTo"
-            value={amountTo}
-            handleChange={this.handleChange}
-            fieldLabel="Amount To"
-          />
-        </Box>
+            <Input
+              isDisabled={true}
+              inputId="amountTo"
+              value={amountTo}
+              handleChange={this.handleChange}
+              fieldLabel="Amount To"
+            />
+          </Box>
         </div>
-        <div className='range-filters'>
-        <Box className='controls' style={{ margin: "20px 0px" }} display="flex">
-          <RangeFilter
-            historyChange={this.setHistoryFrom}
-            historyRange={historyFrom}
-          />
-          <RangeFilter historyChange={this.setHistoryTo} historyRange={historyTo} />
-        </Box>
+        <div className="range-filters">
+          <Box
+            className="controls"
+            style={{ margin: "20px 0px" }}
+            display="flex"
+          >
+            <RangeFilter
+              historyChange={this.setHistoryFrom}
+              historyRange={historyFrom}
+            />
+            <RangeFilter
+              historyChange={this.setHistoryTo}
+              historyRange={historyTo}
+            />
+          </Box>
         </div>
         {this.props.error ? <p className="error">{this.props.error}</p> : null}
       </div>

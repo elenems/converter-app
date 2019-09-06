@@ -16,8 +16,8 @@ const initState = {
   currencyTo: "",
   rates: null,
   historyRates: [],
-  historyFrom: new Date('2015-01-01'),
-  historyTo:new Date()
+  historyFrom: new Date("2015-01-01"),
+  historyTo: new Date()
 };
 
 const currencyReducer = (state = initState, action) => {
@@ -76,18 +76,18 @@ const currencyReducer = (state = initState, action) => {
     return state;
   }
 
-  if(action.type === SET_HISTORY_FROM){
+  if (action.type === SET_HISTORY_FROM) {
     return {
       ...state,
       historyFrom: action.payload.historyFrom
-    }
+    };
   }
 
-  if(action.type === SET_HISTORY_TO){
+  if (action.type === SET_HISTORY_TO) {
     return {
       ...state,
       historyTo: action.payload.historyTo
-    }
+    };
   }
 
   return state;

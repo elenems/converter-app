@@ -5,14 +5,20 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 
-export default React.memo(function Select({ selectId, selectLabel, values, selectValue, handleChange }) {
+export default React.memo(function Select({
+  selectId,
+  selectLabel,
+  values,
+  selectValue,
+  handleChange
+}) {
   const inputLabel = React.useRef(null);
 
   const [labelWidth, setLabelWidth] = React.useState(0);
   React.useEffect(() => {
     setLabelWidth(inputLabel.current.offsetWidth);
   }, []);
-   
+
   return (
     <FormControl variant="outlined">
       <InputLabel ref={inputLabel} htmlFor={selectId}>

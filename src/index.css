@@ -12,16 +12,16 @@ code {
     monospace;
 }
 
-.row{
+.row {
   margin-left: 10%;
   margin-right: 10%;
 }
 
-main{
+main {
   padding-bottom: 40px;
 }
 
-.error{
+.error {
   text-align: center;
   background: #e24141;
   padding: 12px;
@@ -30,10 +30,10 @@ main{
   font-weight: 600;
 }
 
-.chart-container{
-  height:75vh;
+.chart-container {
+  height: 75vh;
 }
 
-.controls .MuiTextField-root{
+.controls .MuiTextField-root {
   margin-right: 26px;
 }

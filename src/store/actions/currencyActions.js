@@ -16,12 +16,20 @@ import axios from "axios";
 
 export const setHistoryRates = payload => dispatch => {
   let { historyFrom, historyTo, currencyFrom, currencyTo } = payload;
-  console.log(historyTo)
-  historyFrom =  new Date(historyFrom).toLocaleDateString().slice(0,10).split('.').reverse().join('-');
-  historyTo = new Date(historyTo).toLocaleDateString().slice(0,10).split('.').reverse().join('-');
-  console.log(historyTo)
+  historyFrom = new Date(historyFrom)
+    .toLocaleDateString()
+    .slice(0, 10)
+    .split(".")
+    .reverse()
+    .join("-");
+  historyTo = new Date(historyTo)
+    .toLocaleDateString()
+    .slice(0, 10)
+    .split(".")
+    .reverse()
+    .join("-");
   if (historyFrom && currencyFrom && currencyTo) {
-    dispatch({type:SET_LOADING});
+    dispatch({ type: SET_LOADING });
     const url = "https://api.exchangeratesapi.io";
     axios
       .get(
@@ -30,14 +38,14 @@ export const setHistoryRates = payload => dispatch => {
       .then(data => {
         dispatch({ type: SET_HISTORY_RATES, payload: data.data.rates });
         dispatch({ type: REMOVE_ERROR });
-        dispatch({type:REMOVE_LOADING});
+        dispatch({ type: REMOVE_LOADING });
       })
       .catch(() => {
         dispatch({
           type: SET_ERROR,
           payload: "Can't load history changes for these currencies"
         });
-        dispatch({type:REMOVE_LOADING});
+        dispatch({ type: REMOVE_LOADING });
       });
   }
 };
@@ -55,28 +63,27 @@ export const switchCurrencies = payload => dispatch => {
 
 export const handleAmountChange = e => dispatch => {
   const value = e.target.value;
-  if (value !== '' && (value < 0 || isNaN(parseFloat(value)))) {
+  if (value !== "" && (value < 0 || isNaN(parseFloat(value)))) {
     dispatch({ type: SET_ERROR, payload: "Enter positive number" });
-  }else {
+  } else {
     dispatch({
       type: CHANGE_AMOUNT,
       payload: { id: e.target.id, value: e.target.value }
     });
-    dispatch({type:REMOVE_ERROR})
+    dispatch({ type: REMOVE_ERROR });
     dispatch({ type: CALCULATE_CURRENCY });
   }
 };
 
-
-export const setHistoryFrom = payload => dispatch =>{
-  dispatch({type: SET_HISTORY_FROM, payload});
-  setHistoryRates(payload)(dispatch)
-}
+export const setHistoryFrom = payload => dispatch => {
+  dispatch({ type: SET_HISTORY_FROM, payload });
+  setHistoryRates(payload)(dispatch);
+};
 
 export const setHistoryTo = payload => dispatch => {
-  dispatch({type: SET_HISTORY_TO, payload})
-  setHistoryRates(payload)(dispatch)
-}
+  dispatch({ type: SET_HISTORY_TO, payload });
+  setHistoryRates(payload)(dispatch);
+};
 
 export const handleCurrencyChange = (e, payload) => dispatch => {
   const { historyFrom, historyTo, currencyFrom, currencyTo } = payload;
@@ -105,8 +112,11 @@ export const handleCurrencyChange = (e, payload) => dispatch => {
 
   if (e.target.name === "currencyTo") {
     dispatch({ type: CALCULATE_CURRENCY });
-    setHistoryRates({ historyFrom, historyTo, currencyTo: e.target.value, currencyFrom })(
-      dispatch
-    );
+    setHistoryRates({
+      historyFrom,
+      historyTo,
+      currencyTo: e.target.value,
+      currencyFrom
+    })(dispatch);
   }
 };

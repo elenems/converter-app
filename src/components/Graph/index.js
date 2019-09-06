@@ -1,2 +1,2 @@
-import Graph from './Graph.jsx';
+import Graph from "./Graph.jsx";
 export default Graph;

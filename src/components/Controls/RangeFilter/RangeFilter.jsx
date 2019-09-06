@@ -1,9 +1,14 @@
 import React from "react";
-import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
-import { KeyboardDatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import "date-fns";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider
+} from "@material-ui/pickers";
 export default function RangeFilter(props) {
-  const [selectedDate, setSelectedDate] = React.useState(new Date(props.historyRange));
+  const [selectedDate, setSelectedDate] = React.useState(
+    new Date(props.historyRange)
+  );
   function handleDateChange(date) {
     setSelectedDate(date);
     props.historyChange(date);
@@ -24,6 +29,6 @@ export default function RangeFilter(props) {
           "aria-label": "change date"
         }}
       />
-    </ MuiPickersUtilsProvider>
+    </MuiPickersUtilsProvider>
   );
 }
