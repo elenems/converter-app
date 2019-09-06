@@ -6,11 +6,14 @@ import Input from "./Input";
 import Select from "./Select";
 import Button from "./Button";
 import { currencies } from "../../data/currencies";
+import RangeFilter from "./RangeFilter";
 import {
   switchCurrencies,
   handleAmountChange,
   handleCurrencyChange,
-  setHistoryRates
+  setHistoryRates,
+  setHistoryFrom,
+  setHistoryTo
 } from "../../store/actions/currencyActions";
 
 const fromCurrencies = currencies;
@@ -22,17 +25,20 @@ class Controls extends Component {
     this.switchCurrecnies = this.switchCurrecnies.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.setHistoryFrom = this.setHistoryFrom.bind(this);
+    this.setHistoryTo = this.setHistoryTo.bind(this);
   }
 
   switchCurrecnies() {
-    const { historyFrom, currencyTo, currencyFrom } = this.props;
-    this.props.switchCurrencies({ currencyTo, historyFrom, currencyFrom });
+    const { historyFrom, historyTo, currencyTo, currencyFrom } = this.props;
+    this.props.switchCurrencies({ currencyTo, historyTo, historyFrom, currencyFrom });
   }
 
   handleSelectChange(e) {
-    const { historyFrom, currencyTo, currencyFrom } = this.props;
+    const { historyFrom, historyTo, currencyTo, currencyFrom } = this.props;
     this.props.handleCurrencyChange(e, {
       historyFrom,
+      historyTo,
       currencyFrom,
       currencyTo
     });
@@ -42,12 +48,39 @@ class Controls extends Component {
     this.props.handleAmountChange(e);
   }
 
+  setHistoryFrom(dateFrom) {
+    const {historyTo, currencyTo, currencyFrom } = this.props;
+    this.props.setHistoryFrom({
+      historyFrom:dateFrom,
+      historyTo,
+      currencyTo,
+      currencyFrom
+    });
+  }
+
+  setHistoryTo(dateTo) {
+    const {historyFrom, currencyTo, currencyFrom } = this.props;
+    this.props.setHistoryTo({
+      historyFrom,
+      historyTo:dateTo,
+      currencyTo,
+      currencyFrom
+    });
+  }
+
   render() {
-    const { amountFrom, currencyFrom, currencyTo, amountTo } = this.props;
+    const {
+      amountFrom,
+      currencyFrom,
+      currencyTo,
+      amountTo,
+      historyFrom,
+      historyTo
+    } = this.props;
     return (
       <div>
         <Box
-          style={{ margin: "40px 0px" }}
+          style={{ margin: "40px 0px 20px" }}
           display="flex"
           justifyContent="space-between"
         >
@@ -86,6 +119,13 @@ class Controls extends Component {
           />
         </Box>
         {this.props.error ? <p className="error">{this.props.error}</p> : null}
+        <Box className='controls' style={{ margin: "20px 0px" }} display="flex">
+          <RangeFilter
+            historyChange={this.setHistoryFrom}
+            historyRange={historyFrom}
+          />
+          <RangeFilter historyChange={this.setHistoryTo} historyRange={historyTo} />
+        </Box>
       </div>
     );
   }
@@ -98,6 +138,7 @@ const mapStateToProps = state => {
     currencyFrom: state.currency.currencyFrom,
     currencyTo: state.currency.currencyTo,
     historyFrom: state.currency.historyFrom,
+    historyTo: state.currency.historyTo,
     error: state.ui.error
   };
 };
@@ -108,7 +149,9 @@ const mapDispatchToProps = dispatch => {
     handleAmountChange: payload => dispatch(handleAmountChange(payload)),
     handleCurrencyChange: (e, payload) =>
       dispatch(handleCurrencyChange(e, payload)),
-    setHistoryRates: payload => dispatch(setHistoryRates(payload))
+    setHistoryRates: payload => dispatch(setHistoryRates(payload)),
+    setHistoryFrom: payload => dispatch(setHistoryFrom(payload)),
+    setHistoryTo: payload => dispatch(setHistoryTo(payload))
   };
 };
 

@@ -33,3 +33,7 @@ main{
 .chart-container{
   height:70vh;
 }
+
+.controls .MuiTextField-root{
+  margin-right: 26px;
+}

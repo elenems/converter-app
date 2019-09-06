@@ -8,23 +8,24 @@ import {
   SET_ERROR,
   REMOVE_ERROR,
   SET_LOADING,
-  REMOVE_LOADING
+  REMOVE_LOADING,
+  SET_HISTORY_FROM,
+  SET_HISTORY_TO
 } from "../actions/actionTypes";
 import axios from "axios";
 
 export const setHistoryRates = payload => dispatch => {
-  const { historyFrom, currencyFrom, currencyTo } = payload;
+  let { historyFrom, historyTo, currencyFrom, currencyTo } = payload;
+  console.log(historyTo)
+  historyFrom =  new Date(historyFrom).toLocaleDateString().slice(0,10).split('.').reverse().join('-');
+  historyTo = new Date(historyTo).toLocaleDateString().slice(0,10).split('.').reverse().join('-');
+  console.log(historyTo)
   if (historyFrom && currencyFrom && currencyTo) {
     dispatch({type:SET_LOADING});
     const url = "https://api.exchangeratesapi.io";
-    const currentDate = new Date()
-      .toLocaleDateString()
-      .split(".")
-      .reverse()
-      .join("-");
     axios
       .get(
-        `${url}/history?start_at=${historyFrom}&end_at=${currentDate}&symbols=${currencyTo},${currencyFrom}`
+        `${url}/history?start_at=${historyFrom}&end_at=${historyTo}&symbols=${currencyTo},${currencyFrom}`
       )
       .then(data => {
         dispatch({ type: SET_HISTORY_RATES, payload: data.data.rates });
@@ -66,8 +67,19 @@ export const handleAmountChange = e => dispatch => {
   }
 };
 
+
+export const setHistoryFrom = payload => dispatch =>{
+  dispatch({type: SET_HISTORY_FROM, payload});
+  setHistoryRates(payload)(dispatch)
+}
+
+export const setHistoryTo = payload => dispatch => {
+  dispatch({type: SET_HISTORY_TO, payload})
+  setHistoryRates(payload)(dispatch)
+}
+
 export const handleCurrencyChange = (e, payload) => dispatch => {
-  const { historyFrom, currencyFrom, currencyTo } = payload;
+  const { historyFrom, historyTo, currencyFrom, currencyTo } = payload;
 
   dispatch({
     type: CHANGE_CURRENCY,
@@ -84,6 +96,7 @@ export const handleCurrencyChange = (e, payload) => dispatch => {
       .then(() => {
         setHistoryRates({
           historyFrom,
+          historyTo,
           currencyTo,
           currencyFrom: e.target.value
         })(dispatch);
@@ -92,7 +105,7 @@ export const handleCurrencyChange = (e, payload) => dispatch => {
 
   if (e.target.name === "currencyTo") {
     dispatch({ type: CALCULATE_CURRENCY });
-    setHistoryRates({ historyFrom, currencyTo: e.target.value, currencyFrom })(
+    setHistoryRates({ historyFrom, historyTo, currencyTo: e.target.value, currencyFrom })(
       dispatch
     );
   }
