@@ -7,7 +7,7 @@ let ctx = null;
 
 export default class Chart extends Component {
   componentDidMount() {
-    ctx = document.getElementById("myChart").getContext("2d");
+    ctx = document.getElementById("myChart");
   }
 
   shouldComponentUpdate(nextProps, nextState) {
