@@ -24,7 +24,7 @@ function RangeFilter(props) {
         format="yyyy/MM/dd"
         margin="normal"
         id="date-picker-inline"
-        label="Date picker inline"
+        label={props.label}
         value={selectedDate}
         onChange={handleDateChange}
         KeyboardButtonProps={{

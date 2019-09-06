@@ -133,10 +133,12 @@ class Controls extends Component {
             display="flex"
           >
             <RangeFilter
+              label='History from'
               historyChange={this.setHistoryFrom}
               historyRange={historyFrom}
             />
             <RangeFilter
+              label = 'History to'
               historyChange={this.setHistoryTo}
               historyRange={historyTo}
             />
