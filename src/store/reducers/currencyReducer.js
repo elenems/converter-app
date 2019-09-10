@@ -79,14 +79,14 @@ const currencyReducer = (state = initState, action) => {
   if (action.type === SET_HISTORY_FROM) {
     return {
       ...state,
-      historyFrom: action.payload.historyFrom
+      historyFrom: action.payload
     };
   }
 
   if (action.type === SET_HISTORY_TO) {
     return {
       ...state,
-      historyTo: action.payload.historyTo
+      historyTo: action.payload
     };
   }
 

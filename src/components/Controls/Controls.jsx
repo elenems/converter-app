@@ -22,31 +22,21 @@ const toCurrencies = currencies;
 class Controls extends Component {
   constructor(props) {
     super(props);
-    this.switchCurrecnies = this.switchCurrecnies.bind(this);
+    this.switchCurrencies = this.switchCurrencies.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.setHistoryFrom = this.setHistoryFrom.bind(this);
     this.setHistoryTo = this.setHistoryTo.bind(this);
   }
 
-  switchCurrecnies() {
-    const { historyFrom, historyTo, currencyTo, currencyFrom } = this.props;
+  switchCurrencies() {
     this.props.switchCurrencies({
-      currencyTo,
-      historyTo,
-      historyFrom,
-      currencyFrom
+      currencyTo: this.props.currencyTo
     });
   }
 
   handleSelectChange(e) {
-    const { historyFrom, historyTo, currencyTo, currencyFrom } = this.props;
-    this.props.handleCurrencyChange(e, {
-      historyFrom,
-      historyTo,
-      currencyFrom,
-      currencyTo
-    });
+    this.props.handleCurrencyChange(e);
   }
 
   handleChange(e) {
@@ -54,22 +44,14 @@ class Controls extends Component {
   }
 
   setHistoryFrom(dateFrom) {
-    const { historyTo, currencyTo, currencyFrom } = this.props;
     this.props.setHistoryFrom({
-      historyFrom: dateFrom,
-      historyTo,
-      currencyTo,
-      currencyFrom
+      historyFrom: dateFrom
     });
   }
 
   setHistoryTo(dateTo) {
-    const { historyFrom, currencyTo, currencyFrom } = this.props;
     this.props.setHistoryTo({
-      historyFrom,
       historyTo: dateTo,
-      currencyTo,
-      currencyFrom
     });
   }
 
@@ -107,7 +89,7 @@ class Controls extends Component {
               selectId="currencyFrom"
             />
 
-            <Button handleClick={this.switchCurrecnies} />
+            <Button handleClick={this.switchCurrencies} />
 
             <Select
               handleChange={this.handleSelectChange}
