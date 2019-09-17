@@ -2,14 +2,9 @@ import {
   SWITCH_CURRENCIES,
   CHANGE_AMOUNT,
   CHANGE_CURRENCY,
-  SET_RATES,
-  CALCULATE_CURRENCY,
-  SET_ERROR,
-  REMOVE_ERROR,
   SET_HISTORY_FROM,
   SET_HISTORY_TO
 } from "../actions/actionTypes";
-import axios from "axios";
 
 export const setHistoryRates = payload => {
   return { type: CHANGE_CURRENCY, payload: { name: payload.name } };
