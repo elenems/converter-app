@@ -149,7 +149,7 @@ const mapDispatchToProps = dispatch => {
     switchCurrencies: payload => dispatch(switchCurrencies(payload)),
     handleAmountChange: payload => dispatch(handleAmountChange(payload)),
     handleCurrencyChange: (e, payload) =>
-      dispatch(handleCurrencyChange(e, payload)),
+    dispatch(handleCurrencyChange(e, payload)),
     setHistoryRates: payload => dispatch(setHistoryRates(payload)),
     setHistoryFrom: payload => dispatch(setHistoryFrom(payload)),
     setHistoryTo: payload => dispatch(setHistoryTo(payload))
