@@ -1,5 +1,4 @@
 import { put, select, takeLatest, all } from "redux-saga/effects";
-import axios from "axios";
 
 import {
   SWITCH_CURRENCIES,
@@ -16,17 +15,33 @@ import {
   SET_HISTORY_TO
 } from "./actions/actionTypes";
 
-function getRates(currencyFrom) {
-  return axios.get(
+function* getRates(currencyFrom) {
+  const rates = yield fetch(
     `https://api.exchangeratesapi.io/latest?base=${currencyFrom}`
-  );
+  ).then(data => {
+    return data.json();
+  });
+  yield put({ type: SET_RATES, payload: rates.rates });
 }
 
-function getHistoryRates(historyFrom, historyTo, currencyTo, currencyFrom) {
+function* setHistoryRates(historyFrom, historyTo, currencyTo, currencyFrom) {
   const url = "https://api.exchangeratesapi.io";
-  return axios.get(
+  const historyRates = yield fetch(
     `${url}/history?start_at=${historyFrom}&end_at=${historyTo}&symbols=${currencyTo},${currencyFrom}`
-  );
+  ).then(data => {
+    return data.json();
+  });
+  if (historyRates.error) {
+    yield put({
+      type: SET_ERROR,
+      payload: "Can't load history changes for these currencies"
+    });
+  } else {
+    yield put({ type: SET_HISTORY_RATES, payload: historyRates.rates });
+    yield put({ type: CALCULATE_CURRENCY });
+    yield getRates(currencyFrom);
+    yield put({ type: REMOVE_ERROR });
+  }
 }
 
 function* changeCurrency() {
@@ -37,30 +52,7 @@ function* changeCurrency() {
 
   if (historyFrom && currencyFrom && currencyTo) {
     yield put({ type: SET_LOADING });
-    let historyRates = null;
-    yield getHistoryRates(
-      historyFrom,
-      historyTo,
-      currencyTo,
-      currencyFrom
-    ).then(data => {
-      historyRates = data;
-    });
-    if (historyRates.error) {
-      yield put({
-        type: SET_ERROR,
-        payload: "Can't load history changes for these currencies"
-      });
-    } else {
-      let rates = null;
-      yield getRates(currencyFrom).then(data => {
-        rates = data.data.rates;
-      });
-      yield put({ type: SET_HISTORY_RATES, payload: historyRates.data.rates });
-      yield put({ type: SET_RATES, payload: rates });
-      yield put({ type: CALCULATE_CURRENCY });
-      yield put({ type: REMOVE_ERROR });
-    }
+    yield setHistoryRates(historyFrom, historyTo, currencyTo, currencyFrom);
     yield put({ type: REMOVE_LOADING });
   }
 }
@@ -86,33 +78,12 @@ function* changeAmountWatcher() {
 function* switchCurrencies() {
   const { currency } = yield select();
   let { historyFrom, historyTo, currencyFrom, currencyTo } = currency;
-  let rates = null;
-  let historyRates = null;
-  yield getRates(currencyFrom).then(data => {
-    rates = data.data.rates;
-  });
+  yield getRates(currencyFrom);
   historyFrom = new Date(historyFrom).toISOString().slice(0, 10);
   historyTo = new Date(historyTo).toISOString().slice(0, 10);
   if (historyFrom && currencyFrom && currencyTo) {
-    yield getHistoryRates(
-      historyFrom,
-      historyTo,
-      currencyTo,
-      currencyFrom
-    ).then(data => {
-      historyRates = data;
-    });
-    if (historyRates.error) {
-      yield put({
-        type: SET_ERROR,
-        payload: "Can't load history changes for these currencies"
-      });
-    } else {
-      yield put({ type: SET_HISTORY_RATES, payload: historyRates.data.rates });
-    }
+    yield setHistoryRates(historyFrom, historyTo, currencyTo, currencyFrom);
   }
-
-  yield put({ type: SET_RATES, payload: rates });
   yield put({ type: CALCULATE_CURRENCY });
 }
 
@@ -123,26 +94,10 @@ function* switchCurrenciesWatcher() {
 function* changeHistory() {
   const { currency } = yield select();
   let { historyFrom, historyTo, currencyFrom, currencyTo } = currency;
-  let historyRates = null;
   historyFrom = new Date(historyFrom).toISOString().slice(0, 10);
   historyTo = new Date(historyTo).toISOString().slice(0, 10);
   if (historyFrom && currencyFrom && currencyTo) {
-    yield getHistoryRates(
-      historyFrom,
-      historyTo,
-      currencyTo,
-      currencyFrom
-    ).then(data => {
-      historyRates = data;
-    });
-    if (historyRates.error) {
-      yield put({
-        type: SET_ERROR,
-        payload: "Can't load history changes for these currencies"
-      });
-    } else {
-      yield put({ type: SET_HISTORY_RATES, payload: historyRates.data.rates });
-    }
+    yield setHistoryRates(historyFrom, historyTo, currencyTo, currencyFrom);
   }
 }
 
