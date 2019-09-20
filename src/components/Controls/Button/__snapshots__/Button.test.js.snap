@@ -1,3 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button should render correctly in "debug" mode 1`] = `ShallowWrapper {}`;
+exports[`Button should render correctly in "debug" mode 1`] = `
+"<WithStyles(Tooltip) title=\\"Switch currencies\\" placement=\\"bottom\\">
+  <WithStyles(ForwardRef(Button)) onClick={[undefined]} variant=\\"contained\\" color=\\"primary\\">
+    <MdChevronLeft />
+    <MdChevronRight />
+  </WithStyles(ForwardRef(Button))>
+</WithStyles(Tooltip)>"
+`;

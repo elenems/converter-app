@@ -30,9 +30,7 @@ class Controls extends Component {
   }
 
   switchCurrencies() {
-    this.props.switchCurrencies({
-      currencyTo: this.props.currencyTo
-    });
+    this.props.switchCurrencies();
   }
 
   handleSelectChange(e) {
@@ -146,7 +144,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    switchCurrencies: payload => dispatch(switchCurrencies(payload)),
+    switchCurrencies: () => dispatch(switchCurrencies()),
     handleAmountChange: payload => dispatch(handleAmountChange(payload)),
     handleCurrencyChange: (e, payload) =>
     dispatch(handleCurrencyChange(e, payload)),

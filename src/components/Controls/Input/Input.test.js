@@ -6,7 +6,7 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 describe('Input', () => {
   it('should render correctly in "debug" mode', () => {
-    const component = shallow(<Input debug />);
+    const component = shallow(<Input />).debug();
     expect(component).toMatchSnapshot();
   });
 });

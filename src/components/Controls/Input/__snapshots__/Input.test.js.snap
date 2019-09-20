@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Input should render correctly in "debug" mode 1`] = `ShallowWrapper {}`;
+exports[`Input should render correctly in "debug" mode 1`] = `"<WithStyles(ForwardRef(TextField)) disabled={false} id={[undefined]} value={[undefined]} label={[undefined]} onChange={[undefined]} variant=\\"outlined\\" />"`;

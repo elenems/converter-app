@@ -1,3 +1,108 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Select should render correctly in "debug" mode 1`] = `ShallowWrapper {}`;
+exports[`Select should render correctly in "debug" mode 1`] = `
+"<WithStyles(ForwardRef(FormControl)) variant=\\"outlined\\">
+  <WithStyles(ForwardRef(InputLabel)) htmlFor={[undefined]} />
+  <WithStyles(ForwardRef(Select)) onChange={[undefined]} value={[undefined]} input={{...}}>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"CAD\\">
+      CAD
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"HKD\\">
+      HKD
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"ISK\\">
+      ISK
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"PHP\\">
+      PHP
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"DKK\\">
+      DKK
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"HUF\\">
+      HUF
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"CZK\\">
+      CZK
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"GBP\\">
+      GBP
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"RON\\">
+      RON
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"SEK\\">
+      SEK
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"IDR\\">
+      IDR
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"INR\\">
+      INR
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"BRL\\">
+      BRL
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"RUB\\">
+      RUB
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"HRK\\">
+      HRK
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"JPY\\">
+      JPY
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"THB\\">
+      THB
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"CHF\\">
+      CHF
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"EUR\\">
+      EUR
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"MYR\\">
+      MYR
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"BGN\\">
+      BGN
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"TRY\\">
+      TRY
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"CNY\\">
+      CNY
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"NOK\\">
+      NOK
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"NZD\\">
+      NZD
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"ZAR\\">
+      ZAR
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"USD\\">
+      USD
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"MXN\\">
+      MXN
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"SGD\\">
+      SGD
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"AUD\\">
+      AUD
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"ILS\\">
+      ILS
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"KRW\\">
+      KRW
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem)) value=\\"PLN\\">
+      PLN
+    </WithStyles(ForwardRef(MenuItem))>
+  </WithStyles(ForwardRef(Select))>
+</WithStyles(ForwardRef(FormControl))>"
+`;
