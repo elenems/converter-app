@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders App 1`] = `
+"<BrowserRouter>
+  <div className=\\"App\\">
+    <Switch>
+      <Route path=\\"/\\" component={[Function: HomePage]} exact={true} />
+      <Route component={[Function: PageNotFound]} />
+    </Switch>
+  </div>
+</BrowserRouter>"
+`;

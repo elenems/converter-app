@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home page renders 1`] = `
+"<div id=\\"homePage\\" className=\\"row\\">
+  <header>
+    <Connect(Controls) />
+  </header>
+  <main>
+    <Connect(Graph) />
+  </main>
+</div>"
+`;

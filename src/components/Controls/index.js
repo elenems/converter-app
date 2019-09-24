@@ -1,2 +1,2 @@
-import Controls from './Controls.jsx';
+import Controls from './Controls.store';
 export default Controls;

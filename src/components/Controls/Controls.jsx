@@ -1,20 +1,11 @@
 import React, { Component } from "react";
 import "./Controls.css";
-import { connect } from "react-redux";
 import Box from "@material-ui/core/Box";
 import Input from "./Input";
 import Select from "./Select";
 import Button from "./Button";
 import { currencies } from "../../data/currencies";
 import RangeFilter from "./RangeFilter";
-import {
-  switchCurrencies,
-  handleAmountChange,
-  handleCurrencyChange,
-  setHistoryRates,
-  setHistoryFrom,
-  setHistoryTo
-} from "../../store/actions/currencyActions";
 
 const fromCurrencies = currencies;
 const toCurrencies = currencies;
@@ -49,7 +40,7 @@ class Controls extends Component {
 
   setHistoryTo(dateTo) {
     this.props.setHistoryTo({
-      historyTo: dateTo,
+      historyTo: dateTo
     });
   }
 
@@ -113,12 +104,12 @@ class Controls extends Component {
             display="flex"
           >
             <RangeFilter
-              label='History from'
+              label="History from"
               historyChange={this.setHistoryFrom}
               historyRange={historyFrom}
             />
             <RangeFilter
-              label = 'History to'
+              label="History to"
               historyChange={this.setHistoryTo}
               historyRange={historyTo}
             />
@@ -130,31 +121,4 @@ class Controls extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    amountFrom: state.currency.amountFrom,
-    amountTo: state.currency.amountTo,
-    currencyFrom: state.currency.currencyFrom,
-    currencyTo: state.currency.currencyTo,
-    historyFrom: state.currency.historyFrom,
-    historyTo: state.currency.historyTo,
-    error: state.ui.error
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    switchCurrencies: () => dispatch(switchCurrencies()),
-    handleAmountChange: payload => dispatch(handleAmountChange(payload)),
-    handleCurrencyChange: (e, payload) =>
-    dispatch(handleCurrencyChange(e, payload)),
-    setHistoryRates: payload => dispatch(setHistoryRates(payload)),
-    setHistoryFrom: payload => dispatch(setHistoryFrom(payload)),
-    setHistoryTo: payload => dispatch(setHistoryTo(payload))
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Controls);
+export default Controls;
