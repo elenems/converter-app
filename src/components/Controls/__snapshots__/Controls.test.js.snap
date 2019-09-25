@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Controls renders 1`] = `
+"<div>
+  <div className=\\"inputs\\">
+    <Styled(MuiBox) style={{...}} display=\\"flex\\" flexWrap=\\"wrap\\" justifyContent=\\"space-between\\">
+      <Memo(Input) isDisabled={false} inputId=\\"amountFrom\\" value={[undefined]} handleChange={[Function: bound handleChange]} fieldLabel=\\"Amount from\\" />
+      <Memo(Select) handleChange={[Function: bound handleSelectChange]} selectValue={[undefined]} values={{...}} selectLabel=\\"Currency from\\" selectId=\\"currencyFrom\\" />
+      <Memo(Button) handleClick={[Function: bound switchCurrencies]} />
+      <Memo(Select) handleChange={[Function: bound handleSelectChange]} selectValue={[undefined]} values={{...}} selectLabel=\\"Currency to\\" selectId=\\"currencyTo\\" />
+      <Memo(Input) isDisabled={true} inputId=\\"amountTo\\" value={[undefined]} handleChange={[Function: bound handleChange]} fieldLabel=\\"Amount To\\" />
+    </Styled(MuiBox)>
+  </div>
+  <div className=\\"range-filters\\">
+    <Styled(MuiBox) className=\\"controls\\" style={{...}} display=\\"flex\\">
+      <Memo(RangeFilter) label=\\"History from\\" historyChange={[Function: bound setHistoryFrom]} historyRange={[undefined]} />
+      <Memo(RangeFilter) label=\\"History to\\" historyChange={[Function: bound setHistoryTo]} historyRange={[undefined]} />
+    </Styled(MuiBox)>
+  </div>
+</div>"
+`;
