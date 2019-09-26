@@ -15,7 +15,7 @@ import {
   SET_HISTORY_TO
 } from "./actions/actionTypes";
 
-function* getRates(currencyFrom) {
+export const getRates = function* getRates(currencyFrom) {
   const rates = yield fetch(
     `https://api.exchangeratesapi.io/latest?base=${currencyFrom}`
   ).then(data => {
@@ -24,7 +24,7 @@ function* getRates(currencyFrom) {
   yield put({ type: SET_RATES, payload: rates.rates });
 }
 
-function* setHistoryRates(historyFrom, historyTo, currencyTo, currencyFrom) {
+export const setHistoryRates = function* setHistoryRates(historyFrom, historyTo, currencyTo, currencyFrom) {
   const url = "https://api.exchangeratesapi.io";
   const historyRates = yield fetch(
     `${url}/history?start_at=${historyFrom}&end_at=${historyTo}&symbols=${currencyTo},${currencyFrom}`
@@ -44,7 +44,7 @@ function* setHistoryRates(historyFrom, historyTo, currencyTo, currencyFrom) {
   }
 }
 
-function* changeCurrency() {
+export const changeCurrency = function* changeCurrency() {
   const { currency } = yield select();
   let { historyFrom, historyTo, currencyFrom, currencyTo } = currency;
   historyFrom = new Date(historyFrom).toISOString().slice(0, 10);
@@ -57,11 +57,11 @@ function* changeCurrency() {
   }
 }
 
-function* currencyChangeWatcher() {
+export const currencyChangeWatcher = function* currencyChangeWatcher() {
   yield takeLatest(CHANGE_CURRENCY, changeCurrency);
 }
 
-function* changeAmount(payload) {
+export const changeAmount = function* changeAmount(payload) {
   const value = payload.payload.value;
   if (value !== "" && (value < 0 || isNaN(parseFloat(value)))) {
     yield put({ type: SET_ERROR, payload: "Enter positive number" });
@@ -71,11 +71,11 @@ function* changeAmount(payload) {
   }
 }
 
-function* changeAmountWatcher() {
+export const changeAmountWatcher = function* changeAmountWatcher() {
   yield takeLatest(CHANGE_AMOUNT, changeAmount);
 }
 
-function* switchCurrencies() {
+export const switchCurrencies = function* switchCurrencies() {
   const { currency } = yield select();
   let { historyFrom, historyTo, currencyFrom, currencyTo } = currency;
   yield getRates(currencyFrom);
@@ -87,11 +87,11 @@ function* switchCurrencies() {
   yield put({ type: CALCULATE_CURRENCY });
 }
 
-function* switchCurrenciesWatcher() {
+export const switchCurrenciesWatcher = function* switchCurrenciesWatcher() {
   yield takeLatest(SWITCH_CURRENCIES, switchCurrencies);
 }
 
-function* changeHistory() {
+export const changeHistory = function* changeHistory() {
   const { currency } = yield select();
   let { historyFrom, historyTo, currencyFrom, currencyTo } = currency;
   historyFrom = new Date(historyFrom).toISOString().slice(0, 10);
@@ -101,13 +101,15 @@ function* changeHistory() {
   }
 }
 
-function* changeHistoryToWatcher() {
+export const changeHistoryToWatcher = function* changeHistoryToWatcher() {
   yield takeLatest(SET_HISTORY_TO, changeHistory);
 }
 
-function* changeHistoryFromWatcher() {
+export const changeHistoryFromWatcher = function* changeHistoryFromWatcher() {
   yield takeLatest(SET_HISTORY_FROM, changeHistory);
 }
+
+
 
 export default function* rootSaga() {
   yield all([

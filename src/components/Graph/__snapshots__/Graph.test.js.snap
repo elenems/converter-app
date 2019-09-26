@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Graph renders 1`] = `
+"<div style={{...}}>
+  <p style={{...}}>
+    Loading...
+  </p>
+  <div style={{...}} className=\\"chart-container\\">
+    <Chart currencyFrom={[undefined]} currencyTo={[undefined]} historyRates={[undefined]} />
+  </div>
+</div>"
+`;

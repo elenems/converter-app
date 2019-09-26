@@ -1,7 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
 import configureMockStore from "redux-mock-store";
-import rootReducer from "../../store/reducers/rootReducer";
 import Controls from "./Controls.store";
 describe("Store actions", () => {
   const mockStore = configureMockStore();

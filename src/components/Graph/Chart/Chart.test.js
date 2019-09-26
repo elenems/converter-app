@@ -1,10 +1,21 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
 import Chart from "./Chart";
-import ChartTable from 'chart.js';
 
 describe("Chart", () => {
-  global.ChartTable = ChartTable;
+  beforeAll(() => {
+    const canvas = document.createElement('canvas');
+    canvas.setAttribute('id', 'myChart');
+    document.body.appendChild(canvas);
+  });
+  
+  afterAll(() => {
+    const canvas = document.getElementById('myChart');
+    if (canvas) {
+      document.body.removeChild(canvas);
+    }
+  });
+
   it('should render correctly in "debug" mode', () => {
     const component = shallow(<Chart />).debug();
     expect(component).toMatchSnapshot();
@@ -36,12 +47,10 @@ describe("Chart", () => {
   });
 
   it("components updates", () => {
-   
     const props = { historyRates: [] };
     const nextProps = {historyRates: [1]}
-    const wrapper = shallow(<Chart {...props} />);
+    const wrapper = mount(<Chart {...props} />, {attachTo: document.getElementById('myChart')});
     const fn = jest.spyOn(wrapper.instance(),'componentDidUpdate');
-    wrapper.update();
     wrapper.setProps(nextProps);
     expect(fn).toHaveBeenCalled()
   });

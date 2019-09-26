@@ -50,4 +50,6 @@ const mapStateToProps = state => {
   };
 };
 
+export const GraphTest = Graph;
+
 export default connect(mapStateToProps)(Graph);
