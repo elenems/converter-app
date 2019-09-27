@@ -1,4 +1,4 @@
-import { put, select, takeLatest, all } from "redux-saga/effects";
+import { put, select, takeLatest, all, fork } from "redux-saga/effects";
 
 import {
   SWITCH_CURRENCIES,
@@ -113,10 +113,10 @@ export const changeHistoryFromWatcher = function* changeHistoryFromWatcher() {
 
 export default function* rootSaga() {
   yield all([
-    currencyChangeWatcher(),
-    changeAmountWatcher(),
-    switchCurrenciesWatcher(),
-    changeHistoryToWatcher(),
-    changeHistoryFromWatcher()
+    fork(currencyChangeWatcher),
+    fork(changeAmountWatcher),
+    fork(switchCurrenciesWatcher),
+    fork(changeHistoryToWatcher),
+    fork(changeHistoryFromWatcher)
   ]);
 }
